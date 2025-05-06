@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slate</title>
+    <meta name="title" content="Slate">
+    <meta name="description" content="Slate is an exploit created by archero with the goal of being the successor to ExtHang3r. The exploit recreates the behavior of the LTMEAT Print method by flooding iframes and then printing the page. For whatever reason, printing a page with a ton of iframes hangs the embedded page rather than the page who embedded it. This is exactly what Slate exploits, since it also works with extension pages (as long they are under web_accessible_resources). This seems to be much more consistent than other extension-freezing methods, and it also lasts for a longer period of time.">
+    <meta name="keywords" content="school blocker bypass, bypasser, bypass school, bypass blocker, securly bypass, goguardian bypass, hapara bypass, lightspeed bypass, lightspeed filter agent bypass, school unblocker, school blocker, unblocker, ext-remover, exthang3r, Slate, ltmeat, ltbeef">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="author" content="Garlic sauce">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://Slate.github.io/">
+    <meta property="og:title" content="Slate">
+    <meta property="og:description" content="Slate is an exploit created by Garlic sauce with the goal of being the successor to ExtHang3r. The exploit recreates the behavior of the LTMEAT Print method by flooding iframes and then printing the page. For whatever reason, printing a page with a ton of iframes hangs the embedded page rather than the page who embedded it. This is exactly what Slate exploits, since it also works with extension pages (as long they are under web_accessible_resources). This seems to be much more consistent than other extension-freezing methods, and it also lasts for a longer period of time.">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://Slate.github.io/">
+    <meta property="twitter:title" content="Slate">
+    <meta property="twitter:description" content="Slate is an exploit created by Garlic sauce with the goal of being the successor to ExtHang3r. The exploit recreates the behavior of the LTMEAT Print method by flooding iframes and then printing the page. For whatever reason, printing a page with a ton of iframes hangs the embedded page rather than the page who embedded it. This is exactly what Slate exploits, since it also works with extension pages (as long they are under web_accessible_resources). This seems to be much more consistent than other extension-freezing methods, and it also lasts for a longer period of time.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="src/unnamed.png" type="image/x-icon">
+</head>
+<canvas id="CrackedCanvas" style="z-index: 1; background-color: black;"></canvas>
+<body>
+    <div class="side-panel">
+        <div style="display: flex; align-items: center;">
+            <img src="src/xDLogo.png" width="50px" height="50px" style="margin-right: 8px; margin-left: -5px; margin-bottom: 10px; ">
+            <h2 style="margin-bottom: 32px;">Slate</h2>
+        </div>
+        <div class="option" data-name="printer-tab">The Exploit</div>
+        <div class="option" data-name="settings-tab">Settings</div>
+        <div class="option" data-name="gallery-tab">Gallery</div>
+        <div class="option" data-name="instructions-tab">Instructions</div>
+        <div style="border-top: 1px solid #444; margin-top: 10px; padding-top: 10px; width: 100%;"></div>
+    
+        <!-- Time and Refresh Section -->
+        <div style="margin-top: 1px; text-align: center;">
+            <div style="display: flex; align-items: center; justify-content: center; margin-top: 4px;">
+                <!-- Refresh Button -->
+                <button onclick="showRemainingTime()" style="background: none; border: none; cursor: pointer; padding: 10px; transition: transform 0.3s ease; margin-right: -5px; margin-left: -80px; margin-bottom: 15px;">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="30px" height="30px">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <path d="M4.06189 13C4.02104 12.6724 4 12.3387 4 12C4 7.58172 7.58172 4 12 4C14.5006 4 16.7332 5.14727 18.2002 6.94416M19.9381 11C19.979 11.3276 20 11.6613 20 12C20 16.4183 16.4183 20 12 20C9.61061 20 7.46589 18.9525 6 17.2916M9 17H6V17.2916M18.2002 4V6.94416M18.2002 6.94416V6.99993L15.2002 7M6 20V17.2916" stroke="#007bff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </g>
+                    </svg>
+                </button>
+
+                <!-- Time Remaining and License Status -->
+                <div style="display: flex; flex-direction: column; align-items: flex-start; color: #777;">
+                    <div style="font-size: 14px; margin-bottom: 5px; margin-left: 15px;">| Time Remaining |</div>
+                    <div id="timedisplay" style="font-size: 14px; margin-left: 15px;">License Status: Pending</div>
+                </div>
+            </div>
+
+            <div style="border-top: 1px solid #444; margin-top: 10px; padding-top: 10px; width: 100%;"></div>
+        </div>
+    
+        <!-- Footer Section -->
+        <p style="text-align: center; margin-top: 15px; user-select: none;">Made by archero</p>
+        <p style="text-align: center; margin-left: -10px; margin-top: -15px; user-select: none;">
+            <a href="https://discord.gg/u3qrzqttWV" target="_blank">
+                <img src="src/joindiscord.png" alt="Join Discord" style="width: 250px; height: 80px;" />
+            </a>
+        </p>
+    </div>
+    
+    <div class="main-content" id="main-content" style="display: none;">
+        <div id="printer-tab">
+            <h3 style="user-select: none; font-weight: 400;">All Extensions</h3>
+            <div id="div-container"></div>
+        </div>
+        <div id="settings-tab" style="display: none;">
+            <h2 style="user-select: none;">Settings</h2>
+            <label for="show-all-extensions" style="pointer-events: none;">Show All Extensions</label><input id="show-all-extensions" type="checkbox">
+            <br>
+            <label for="iframe-count">Amount of iframes(change to change how long tmp bypass is)</label><input type="range" min="100" max="1000000" value="2500" step="100" id="iframe-count"><span id="iframe-count-display">2500</span>
+            <div style="border-top: 1px solid #444; margin-bottom: 10px; margin-top: 20px; padding-top: 10px; width: 100%;"></div>
+            <label for="developer-mode" style="pointer-events: none;">Developer Mode</label><input id="developer-mode" type="checkbox"><br>
+            <div id="dev-settings" style="display: none;">
+                <button style="min-width:240px;" id="add-ext">Temporarily Add Extension To List</button>
+            </div>
+        </div>
+        <div id="gallery-tab" style="display: none;">
+            <div class="gallery-tab">
+                <!-- Discord -->
+                <div class="card">
+                    <img src="src/Discord.png" alt="Card Image">
+                    <div class="card-content">
+                        <h3 class="card-title">Discord</h3>
+                        <p class="card-description">
+                            Chat, voice, and video communication platform.
+                        </p>
+                        <div class="card-tags">
+                            <span class="tag">#communication</span>
+                        </div>
+                        <a href="https://discord.com/" class="card-launch-button" target="_blank">Launch</a>
+                    </div>
+                </div>
+    
+                <!-- Alternitive Discord -->
+                <div class="card">
+                    <img src="src/DiscordClone.png" alt="Card Image">
+                    <div class="card-content">
+                        <h3 class="card-title">Discord, but you dont have to login</h3>
+                        <p class="card-description">
+                            Chat communication platform.
+                        </p>
+                        <div class="card-tags">
+                            <span class="tag">#communication</span>
+                        </div>
+                        <a href="https://bypasskhord.netlify.app/" class="card-launch-button" target="_blank">Launch</a>
+                    </div>
+                </div>
+            
+                <!-- EaglerCraft -->
+                <div class="card">
+                    <img src="src/Eaglercraft.png" alt="Card Image">
+                    <div class="card-content">
+                        <h3 class="card-title">EaglerCraft</h3>
+                        <p class="card-description">
+                          minecraft but like wittawy in your browser
+                        </p>
+                        <div class="card-tags">
+                            <span class="tag">#games</span>
+                            <span class="tag">#staff-pick</span>
+                        </div>
+                        <a href="https://eaglercraft.com/" class="card-launch-button" target="_blank">Launch</a>
+                    </div>
+                </div>
+            
+
+                <!-- Crazy Games -->
+                <div class="card">
+                    <img src="src/CrazyGames.png" alt="Card Image">
+                    <div class="card-content">
+                        <h3 class="card-title">Crazy Games</h3>
+                        <p class="card-description">
+                            Play free online games on Crazy Games.
+                        </p>
+                        <div class="card-tags">
+                            <span class="tag">#games</span>
+                        </div>
+                        <a href="https://www.crazygames.com/" class="card-launch-button" target="_blank">Launch</a>
+                    </div>
+                </div>
+            
+                <!-- Poki -->
+                <div class="card">
+                    <img src="src/PokiGames.png" alt="Card Image">
+                    <div class="card-content">
+                        <h3 class="card-title">Poki</h3>
+                        <p class="card-description">
+                            Play free online games on Poki.
+                        </p>
+                        <div class="card-tags">
+                            <span class="tag">#games</span>
+                        </div>
+                        <a href="https://poki.com/" class="card-launch-button" target="_blank">Launch</a>
+                    </div>
+                </div>
+            
+                <!-- Agame -->
+                <div class="card">
+                    <img src="src/AGame.png" alt="Card Image">
+                    <div class="card-content">
+                        <h3 class="card-title">Agame</h3>
+                        <p class="card-description">
+                            Play free online games on Agame.
+                        </p>
+                        <div class="card-tags">
+                            <span class="tag">#games</span>
+                        </div>
+                        <a href="https://www.agame.com/" class="card-launch-button" target="_blank">Launch</a>
+                    </div>
+                </div>
+            
+                <!-- Hianime -->
+                <div class="card">
+                    <img src="src/Hianime.png" alt="Card Image">
+                    <div class="card-content">
+                        <h3 class="card-title">Hianime</h3>
+                        <p class="card-description">
+                            Stream free anime on Hianime.
+                        </p>
+                        <div class="card-tags">
+                            <span class="tag">#anime</span>
+                        </div>
+                        <a href="https://hianime.to/" class="card-launch-button" target="_blank">Launch</a>
+                    </div>
+                </div>
+
+                <!-- Aniwatchtv -->
+                <div class="card">
+                    <img src="src/Aniwatch.png" alt="Card Image">
+                    <div class="card-content">
+                        <h3 class="card-title">Aniwatch</h3>
+                        <p class="card-description">
+                            Stream free anime on Aniwatchtv.
+                        </p>
+                        <div class="card-tags">
+                            <span class="tag">#anime</span>
+                        </div>
+                        <a href="https://aniwatchtv.to/" class="card-launch-button" target="_blank">Launch</a>
+                    </div>
+                </div>
+
+                <!-- Alienflix -->
+                <div class="card">
+                    <img src="src/Alienflix.png" alt="Card Image">
+                    <div class="card-content">
+                        <h3 class="card-title">Alienflix</h3>
+                        <p class="card-description">
+                            Stream movies and shows for free on Alienflix.
+                        </p>
+                        <div class="card-tags">
+                            <span class="tag">#movies</span>
+                        </div>
+                        <a href="https://alienflix.net/" class="card-launch-button" target="_blank">Launch</a>
+                    </div>
+                </div>
+            
+                <!-- Uira Live -->
+                <div class="card">
+                    <img src="src/UiraLive.png" alt="Card Image">
+                    <div class="card-content">
+                        <h3 class="card-title">Uira Live</h3>
+                        <p class="card-description">
+                            Watch movies and TV shows online for free.
+                        </p>
+                        <div class="card-tags">
+                            <span class="tag">#movies</span>
+                        </div>
+                        <a href="https://uira.live/" class="card-launch-button" target="_blank">Launch</a>
+                    </div>
+                </div>
+            
+                <!-- Freek.to -->
+                <div class="card">
+                    <img src="src/Freekto.png" alt="Card Image">
+                    <div class="card-content">
+                        <h3 class="card-title">Freek.to</h3>
+                        <p class="card-description">
+                            Free streaming platform for movies and TV shows.
+                        </p>
+                        <div class="card-tags">
+                            <span class="tag">#movies</span>
+                        </div>
+                        <a href="https://freek.to/" class="card-launch-button" target="_blank">Launch</a>
+                    </div>
+                </div>
+            
+                <!-- Mokmobi -->
+                <div class="card">
+                    <img src="src/Mokmobi.png" alt="Card Image">
+                    <div class="card-content">
+                        <h3 class="card-title">Mokmobi</h3>
+                        <p class="card-description">
+                            Watch movies and TV shows online for free.
+                        </p>
+                        <div class="card-tags">
+                            <span class="tag">#movies</span>
+                        </div>
+                        <a href="https://mokmobi.ovh/" class="card-launch-button" target="_blank">Launch</a>
+                    </div>
+                </div>
+            
+                <!-- Novastream -->
+                <div class="card">
+                    <img src="src/Novastream.png" alt="Card Image">
+                    <div class="card-content">
+                        <h3 class="card-title">Novastream</h3>
+                        <p class="card-description">
+                            Stream movies and TV shows for free.
+                        </p>
+                        <div class="card-tags">
+                            <span class="tag">#movies</span>
+                        </div>
+                        <a href="https://novastream.top/" class="card-launch-button" target="_blank">Launch</a>
+                    </div>
+                </div>
+            
+                <!-- Catflix -->
+                <div class="card">
+                    <img src="src/Catflix.png" alt="Card Image">
+                    <div class="card-content">
+                        <h3 class="card-title">Catflix</h3>
+                        <p class="card-description">
+                            Free streaming platform for movies and TV shows.
+                        </p>
+                        <div class="card-tags">
+                            <span class="tag">#movies</span>
+                        </div>
+                        <a href="https://catflix.su/" class="card-launch-button" target="_blank">Launch</a>
+                    </div>
+                </div>
+            
+                <!-- Kaito Vault -->
+                <div class="card">
+                    <img src="src/KaitoVault.png" alt="Card Image">
+                    <div class="card-content">
+                        <h3 class="card-title">Kaito Vault</h3>
+                        <p class="card-description">
+                            Watch movies and TV shows for free.
+                        </p>
+                        <div class="card-tags">
+                            <span class="tag">#movies</span>
+                        </div>
+                        <a href="https://www.kaitovault.com/" class="card-launch-button" target="_blank">Launch</a>
+                    </div>
+                </div>
+            
+                <!-- M4UFree -->
+                <div class="card">
+                    <img src="src/M4ufree.png" alt="Card Image">
+                    <div class="card-content">
+                        <h3 class="card-title">M4UFree</h3>
+                        <p class="card-description">
+                            Free streaming platform for movies and TV shows.
+                        </p>
+                        <div class="card-tags">
+                            <span class="tag">#movies</span>
+                        </div>
+                        <a href="https://m4ufree.se/" class="card-launch-button" target="_blank">Launch</a>
+                    </div>
+                </div>
+            
+                <!-- MyFlixed -->
+                <div class="card">
+                    <img src="src/MyFlixed.png" alt="Card Image">
+                    <div class="card-content">
+                        <h3 class="card-title">MyFlixed</h3>
+                        <p class="card-description">
+                            Stream movies and TV shows for free.
+                        </p>
+                        <div class="card-tags">
+                            <span class="tag">#movies</span>
+                        </div>
+                        <a href="https://www.myflixed.fun/" class="card-launch-button" target="_blank">Launch</a>
+                    </div>
+                </div>
+            
+                <!-- Corsflix -->
+                <div class="card">
+                    <img src="src/Corsflix.png" alt="Card Image">
+                    <div class="card-content">
+                        <h3 class="card-title">Corsflix</h3>
+                        <p class="card-description">
+                            Free streaming platform for movies and TV shows.
+                        </p>
+                        <div class="card-tags">
+                            <span class="tag">#movies</span>
+                        </div>
+                        <a href="https://corsflix.net/" class="card-launch-button" target="_blank">Launch</a>
+                    </div>
+                </div>
+            
+                <!-- TikTok -->
+                <div class="card">
+                    <img src="src/TikTok.png" alt="Card Image">
+                    <div class="card-content">
+                        <h3 class="card-title">TikTok</h3>
+                        <p class="card-description">
+                            Short-form video platform for entertainment.
+                        </p>
+                        <div class="card-tags">
+                            <span class="tag">#media</span>
+                        </div>
+                        <a href="https://www.tiktok.com/en/" class="card-launch-button" target="_blank">Launch</a>
+                    </div>
+                </div>
+            
+                <!-- YouTube -->
+                <div class="card">
+                    <img src="src/Youtube.png" alt="Card Image">
+                    <div class="card-content">
+                        <h3 class="card-title">YouTube</h3>
+                        <p class="card-description">
+                            Watch and share videos on YouTube.
+                        </p>
+                        <div class="card-tags">
+                            <span class="tag">#media</span>
+                        </div>
+                        <a href="https://www.youtube.com/" class="card-launch-button" target="_blank">Launch</a>
+                    </div>
+                </div>
+            
+
+                  <!-- adolf hitler -->
+                  <div class="card">
+                    <img src="src/hitler.png" alt="Card Image">
+                    <div class="card-content">
+                        <h3 class="card-title">hitler</h3>
+                        <p class="card-description">
+                        fuck the jews
+                        </p>
+                        <div class="card-tags">
+                            <span class="tag">#nojews</span>
+                        </div>
+                        <a href="https://gutenberg.net.au/ebooks02/0200601h.html" class="card-launch-button" target="_blank">Launch</a>
+                    </div>
+                </div>
+
+
+                <!-- Instagram -->
+                <div class="card">
+                    <img src="src/Instagram.png" alt="Card Image">
+                    <div class="card-content">
+                        <h3 class="card-title">Instagram</h3>
+                        <p class="card-description">
+                            Share photos, videos, and stories.
+                        </p>
+                        <div class="card-tags">
+                            <span class="tag">#media</span>
+                        </div>
+                        <a href="https://www.instagram.com/" class="card-launch-button" target="_blank">Launch</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="instructions-tab" style="display: none;">
+            <h1>Important Instructions</h1>
+            <p>Thank you for using <strong>Slate</strong>! When you select an extension and complete the bypass process, all necessary instructions will be clearly displayed.</p>
+            <p><strong>Before shutting down your Chromebook for the day, please follow these steps:</strong></p>
+            <ol>
+                <li>Click <strong>"Sign Out."</strong></li>
+                <li><strong>Do NOT restore tabs</strong> when signing back in. This will:
+                    <ul>
+                        <li>Ensure your Chromebook is re-blocked (teachers won't see anything).</li>
+                        <li>Improve the overall performance and health of your device.</li>
+                    </ul>
+                </li>
+            </ol>
+            <p>That's it! When you're ready, just run this again.</p>
+        </div>
+        
+    </div>
+    <canvas id="ParticleCanvas" style="position: fixed; top: 0; left: 0; z-index: -1;"></canvas>
+    <script src="script.js"></script>
+    <script src="particles.js"></script>
+    <script src="bypass.js"></script>
+</body>
+</html>

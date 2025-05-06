@@ -1,7 +1,7 @@
 {
   "launchoptions": [
     {
-      "image": "example.com/image",
+      "image": "src/slate.png",
       "info": "slate unblocker",
       "files url": "https://raw.githubusercontent.com/1928HDBNWONHD/2E23DEDAAAA/refs/heads/main/files.json"
     },

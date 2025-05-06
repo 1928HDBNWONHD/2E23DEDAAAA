@@ -137,7 +137,7 @@
   },
   "EXODUS-8HXCX5": {
     "expiry": "1 week",
-    "claimed": false
+    "claimed": true
   },
   "EXODUS-7EV0PE": {
     "expiry": "3 month",

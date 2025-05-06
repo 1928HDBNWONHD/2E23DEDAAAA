@@ -1,0 +1,24 @@
+{
+  "updates": [
+    {
+      "version": "v1",
+      "content": "added encryption"
+    },
+    {
+      "version": "v2",
+      "content": "added stuff"
+    },
+    {
+      "version": "v3",
+      "content": "idk"
+    },
+    {
+      "version": "v4",
+      "content": "sss"
+    },
+    {
+      "version": "v5",
+      "content": "sssss"
+    }
+  ]
+}

@@ -205,7 +205,7 @@
   },
   "EXODUS-HGQSGI": {
     "expiry": "1 month",
-    "claimed": false
+    "claimed": true
   },
   "EXODUS-EXODUS-lol": {
     "expiry": "-1 month",

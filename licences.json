@@ -25,7 +25,7 @@
   },
   "EXODUS-XHMM67": {
     "expiry": "1 week",
-    "claimed": true
+    "claimed": false
   },
   "EXODUS-QTHR9B": {
     "expiry": "1 week",
@@ -109,7 +109,7 @@
   },
   "EXODUS-G6OKT9": {
     "expiry": "1 week",
-    "claimed": false
+    "claimed": true
   },
   "EXODUS-739WJ5": {
     "expiry": "1 week",

